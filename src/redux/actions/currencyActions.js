@@ -78,3 +78,19 @@ export const deleteValue = (id) => async (dispatch) => {
         console.error('Error deleting value:', error);
     }
 };
+
+export const deleteCurrency = (currencyId) => async (dispatch) => {
+    try {
+        const response = await fetch(`http://localhost:5000/api/currency/${currencyId}`, {
+            method: 'DELETE',
+        });
+        
+        if (!response.ok) {
+            throw new Error('Failed to delete currency');
+        }
+
+        dispatch({ type: 'DELETE_CURRENCY', payload: currencyId });
+    } catch (error) {
+        console.error('Error deleting currency:', error);
+    }
+};

@@ -23,4 +23,16 @@ router.get('/all', async (req, res) => {
     }
 });
 
+router.delete('/:id', async (req, res) => {
+    try {
+        const currency = await Currency.findByIdAndDelete(req.params.id);
+        if (!currency) {
+            return res.status(404).json({ message: 'Currency not found' });
+        }
+        res.json({ message: 'Currency deleted successfully' });
+    } catch (error) {
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
 module.exports = router;

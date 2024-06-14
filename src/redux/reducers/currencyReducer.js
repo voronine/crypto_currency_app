@@ -12,6 +12,8 @@ const currencyReducer = (state = initialState, action) => {
             return { ...state, currencies: action.payload };
         case 'SET_CURRENCY_PRICE':
             return { ...state, prices: { ...state.prices, [action.payload.symbol]: action.payload.price } };
+        case 'DELETE_CURRENCY':
+            return { ...state, currencies: state.currencies.filter(currency => currency._id !== action.payload) };
         default:
             return state;
     }
