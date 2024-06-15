@@ -1,4 +1,3 @@
-// src/components/AddCurrencyModal.js
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import { useDispatch } from 'react-redux';

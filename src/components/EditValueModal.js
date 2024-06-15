@@ -1,7 +1,9 @@
+// src/components/EditValueModal.js
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import { useDispatch } from 'react-redux';
 import { updateValue } from '../redux/actions/valueActions';
+import styles from '../styles/EditValueModal.module.scss';
 
 const EditValueModal = ({ isOpen, onRequestClose, value }) => {
     const [amount, setAmount] = useState(value.amount);
@@ -13,38 +15,16 @@ const EditValueModal = ({ isOpen, onRequestClose, value }) => {
         onRequestClose();
     };
 
-    const customStyles = {
-        content: {
-            top: '50%',
-            left: '50%',
-            right: 'auto',
-            bottom: 'auto',
-            marginRight: '-50%',
-            transform: 'translate(-50%, -50%)',
-            width: '300px',
-            padding: '20px',
-            position: 'relative'
-        },
-    };
-
     return (
-        <Modal isOpen={isOpen} onRequestClose={onRequestClose} style={customStyles}>
-            <button onClick={onRequestClose} style={{
-                position: 'absolute',
-                top: '10px',
-                right: '10px',
-                background: 'transparent',
-                border: 'none',
-                fontSize: '20px',
-                cursor: 'pointer',
-            }}>✖</button>
-            <h2>Edit Value</h2>
-            <form onSubmit={handleSubmit}>
-                <label>
+        <Modal isOpen={isOpen} onRequestClose={onRequestClose} className={styles.modal} overlayClassName={styles.overlay}>
+            <button onClick={onRequestClose} className={styles.closeButton}>✖</button>
+            <h2 className={styles.heading}>Edit Value</h2>
+            <form onSubmit={handleSubmit} className={styles.form}>
+                <label className={styles.label}>
                     Amount in USDT:
-                    <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} required />
+                    <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} required className={styles.input} />
                 </label>
-                <button type="submit">Save</button>
+                <button type="submit" className={styles.button}>Save</button>
             </form>
         </Modal>
     );
