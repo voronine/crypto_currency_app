@@ -13,8 +13,31 @@ const EditValueModal = ({ isOpen, onRequestClose, value }) => {
         onRequestClose();
     };
 
+    const customStyles = {
+        content: {
+            top: '50%',
+            left: '50%',
+            right: 'auto',
+            bottom: 'auto',
+            marginRight: '-50%',
+            transform: 'translate(-50%, -50%)',
+            width: '300px',
+            padding: '20px',
+            position: 'relative'
+        },
+    };
+
     return (
-        <Modal isOpen={isOpen} onRequestClose={onRequestClose}>
+        <Modal isOpen={isOpen} onRequestClose={onRequestClose} style={customStyles}>
+            <button onClick={onRequestClose} style={{
+                position: 'absolute',
+                top: '10px',
+                right: '10px',
+                background: 'transparent',
+                border: 'none',
+                fontSize: '20px',
+                cursor: 'pointer',
+            }}>✖</button>
             <h2>Edit Value</h2>
             <form onSubmit={handleSubmit}>
                 <label>

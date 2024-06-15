@@ -1,0 +1,44 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background: #808080;
+    color: #fff;
+}
+
+.select-container {
+    min-width: 200px;
+}
+
+.select__option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.select__option button {
+    margin-left: auto;
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+.price {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.add-values-button {
+    background: #00C851;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.add-values-button:hover {
+    background: #00b140;
+}

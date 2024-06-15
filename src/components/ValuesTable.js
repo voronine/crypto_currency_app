@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchValues, deleteValue } from '../redux/actions/valueActions';
 import EditValueModal from './EditValueModal';
+import styles from '../styles/valuesTable.module.scss';
 
 const ValuesTable = ({ currencyId }) => {
     const dispatch = useDispatch();
@@ -24,10 +25,10 @@ const ValuesTable = ({ currencyId }) => {
 
     return (
         <>
-            <table>
+            <table className={styles.table}>
                 <thead>
                     <tr>
-                        <th>Amount in USDT</th>
+                        <th>Amount in USD</th>
                         <th>Time</th>
                         <th>Actions</th>
                     </tr>
@@ -37,9 +38,9 @@ const ValuesTable = ({ currencyId }) => {
                         <tr key={value._id}>
                             <td>{value.amount}</td>
                             <td>{new Date(value.time).toLocaleString()}</td>
-                            <td>
-                                <button onClick={() => handleEdit(value)}>Edit</button>
-                                <button onClick={() => handleDelete(value._id)}>Delete</button>
+                            <td className={styles.actions}>
+                                <button className={styles.editButton} onClick={() => handleEdit(value)}>EDIT</button>
+                                <button className={styles.deleteButton} onClick={() => handleDelete(value._id)}>DELETE</button>
                             </td>
                         </tr>
                     ))}

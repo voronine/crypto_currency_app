@@ -1,18 +1,19 @@
 // src/App.js
 import React, { useState, useEffect } from 'react';
-import { Provider, useDispatch } from 'react-redux';
+import { Provider, useDispatch, useSelector } from 'react-redux';
 import store from './redux/store';
 import Header from './components/Header';
 import { fetchCurrencies } from './redux/actions/currencyActions';
-import CurrencyPrice from './components/CurrencyPrice';
 import ValuesTable from './components/ValuesTable';
 import ValuesChart from './components/ValuesChart';
-import AddValueModal from './components/AddValueModal';
+import AddCurrencyModal from './components/AddCurrencyModal';
+import styles from './styles/button.module.scss';
 
 const App = () => {
-    const [isValueModalOpen, setValueModalOpen] = useState(false);
+    const [isCurrencyModalOpen, setCurrencyModalOpen] = useState(false);
     const [selectedCurrency, setSelectedCurrency] = useState(null);
     const dispatch = useDispatch();
+    const currencies = useSelector((state) => state.currency.currencies);
 
     useEffect(() => {
         dispatch(fetchCurrencies());
@@ -22,19 +23,33 @@ const App = () => {
         setSelectedCurrency(currency);
     };
 
+    const handleAddCurrency = () => {
+        setCurrencyModalOpen(true);
+    };
+
     return (
         <Provider store={store}>
             <div className="App">
-                <Header onSelectCurrency={handleCurrencySelect} />
-                {selectedCurrency && (
-                    <div>
-                        <CurrencyPrice symbol={selectedCurrency.name} />
-                        <button onClick={() => setValueModalOpen(true)}>Add Value</button>
-                        <AddValueModal isOpen={isValueModalOpen} onRequestClose={() => setValueModalOpen(false)} currencyId={selectedCurrency._id} />
-                        <ValuesTable currencyId={selectedCurrency._id} />
-                        <ValuesChart currencyId={selectedCurrency._id} />
+                {currencies.length === 0 ? (
+                    <div className={styles.centeredContainer}>
+                        <button className={styles.button} onClick={handleAddCurrency}>Add Currency</button>
                     </div>
+                ) : (
+                    <>
+                        <Header 
+                            onSelectCurrency={handleCurrencySelect} 
+                            onAddCurrencyClick={handleAddCurrency} 
+                            selectedCurrency={selectedCurrency}
+                        />
+                        {selectedCurrency && (
+                            <div>
+                                <ValuesChart currencyId={selectedCurrency._id} />
+                                <ValuesTable currencyId={selectedCurrency._id} />
+                            </div>
+                        )}
+                    </>
                 )}
+                <AddCurrencyModal isOpen={isCurrencyModalOpen} onRequestClose={() => setCurrencyModalOpen(false)} />
             </div>
         </Provider>
     );
