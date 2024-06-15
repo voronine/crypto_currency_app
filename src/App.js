@@ -1,6 +1,6 @@
 // src/App.js
 import React, { useState, useEffect } from 'react';
-import { Provider, useDispatch, useSelector } from 'react-redux';
+import { Provider, useDispatch } from 'react-redux';
 import store from './redux/store';
 import Header from './components/Header';
 import { fetchCurrencies } from './redux/actions/currencyActions';

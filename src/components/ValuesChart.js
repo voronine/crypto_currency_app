@@ -1,24 +1,21 @@
 // src/components/ValuesChart.js
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Line } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 import {
     Chart as ChartJS,
-    LineElement,
-    PointElement,
+    BarElement,
+    CategoryScale,
     LinearScale,
-    TimeScale,
     Title,
     Tooltip,
     Legend
 } from 'chart.js';
-import 'chartjs-adapter-date-fns';
 
 ChartJS.register(
-    LineElement,
-    PointElement,
+    BarElement,
+    CategoryScale,
     LinearScale,
-    TimeScale,
     Title,
     Tooltip,
     Legend
@@ -27,15 +24,28 @@ ChartJS.register(
 const ValuesChart = () => {
     const values = useSelector((state) => state.value.values);
 
+    // Сортируем значения по дате
+    const sortedValues = values.slice().sort((a, b) => new Date(a.time) - new Date(b.time));
+
+    // Формируем данные и цвета для столбиков
     const data = {
-        labels: values.map((value) => value.time),
+        labels: sortedValues.map((value) => {
+            const date = new Date(value.time);
+            const formattedTime = `${('0' + date.getHours()).slice(-2)}:${('0' + date.getMinutes()).slice(-2)} ${('0' + date.getDate()).slice(-2)}.${('0' + (date.getMonth() + 1)).slice(-2)}.${date.getFullYear()}`;
+            return formattedTime;
+        }),
         datasets: [
             {
                 label: 'Amount in USDT',
-                data: values.map((value) => value.amount),
-                fill: false,
-                backgroundColor: 'rgb(75, 192, 192)',
+                data: sortedValues.map((value) => value.amount),
+                backgroundColor: sortedValues.map((value, index) => {
+                    if (index === 0) return 'green'; // Первый столбик зелёный
+                    if (index === 1) return 'red'; // Второй столбик красный
+                    return value.amount > sortedValues[index - 1].amount ? 'red' : 'green';
+                }),
                 borderColor: 'rgba(75, 192, 192, 0.2)',
+                categoryPercentage: 1.0, // Полная ширина категории
+                barPercentage: 1.0, // Полная ширина столбика
             },
         ],
     };
@@ -43,20 +53,32 @@ const ValuesChart = () => {
     const options = {
         scales: {
             x: {
-                type: 'time',
-                time: {
-                    unit: 'day',
-                    tooltipFormat: 'PP',
-                },
+                type: 'category',
                 title: {
-                    display: true,
-                    text: 'Date',
+                    display: false, // Убираем подпись "Дата"
+                },
+                grid: {
+                    offset: false, // Убираем смещение сетки
+                    display: false, // Убираем сетку
+                },
+                ticks: {
+                    autoSkip: false, // Показываем все метки
                 },
             },
             y: {
                 title: {
                     display: true,
                     text: 'Amount in USDT',
+                },
+                beginAtZero: true, // Начинаем ось Y с нуля
+                grid: {
+                    display: true, // Включаем сетку
+                    drawBorder: false,
+                    color: (context) => context.tick.value % 1000 === 0 ? 'rgba(0, 0, 0, 0.1)' : 'rgba(0, 0, 0, 0.05)',
+                    borderDash: (context) => context.tick.value % 1000 === 0 ? [5, 5] : [],
+                },
+                ticks: {
+                    callback: (value) => value % 1000 === 0 ? `${value}` : null,
                 },
             },
         },
@@ -70,12 +92,13 @@ const ValuesChart = () => {
                 text: 'Values Chart',
             },
         },
+        maintainAspectRatio: false, // Отмена сохранения соотношения сторон для настройки ширины
     };
 
     return (
-        <div>
+        <div style={{ width: '600px', height: '400px' }}>
             <h2>Values Chart</h2>
-            <Line data={data} options={options} />
+            <Bar data={data} options={options} />
         </div>
     );
 };
