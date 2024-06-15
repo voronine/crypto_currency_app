@@ -41,3 +41,24 @@ export const deleteValue = (id) => async (dispatch) => {
         console.error('Error deleting value:', error);
     }
 };
+
+export const updateValue = (id, updatedValue) => async (dispatch) => {
+    try {
+        const response = await fetch(`http://localhost:5000/api/value/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedValue),
+        });
+        
+        if (!response.ok) {
+            throw new Error('Failed to update value');
+        }
+
+        const data = await response.json();
+        dispatch({ type: 'UPDATE_VALUE', payload: data });
+    } catch (error) {
+        console.error('Error updating value:', error);
+    }
+};

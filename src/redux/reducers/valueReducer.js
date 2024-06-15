@@ -14,6 +14,13 @@ const valueReducer = (state = initialState, action) => {
                 ...state,
                 values: state.values.filter((value) => value._id !== action.payload),
             };
+        case 'UPDATE_VALUE':
+            return {
+                ...state,
+                values: state.values.map((value) =>
+                    value._id === action.payload._id ? action.payload : value
+                ),
+            };
         default:
             return state;
     }
