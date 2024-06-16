@@ -4,7 +4,6 @@ services:
     env: node
     plan: free
     buildCommand: |
-      cd client
       npm install
       npm run build
       cd ../currency-app-server
