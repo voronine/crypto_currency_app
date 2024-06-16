@@ -10,3 +10,7 @@ services:
         value: 'mongodb+srv://voroninyevhenii:Marata117@cluster0.vsvglqf.mongodb.net/currencydb?retryWrites=true&w=majority'
       - key: PORT
         value: 5000
+    routes:
+      - path: /*
+        headers:
+          Content-Security-Policy: "default-src 'self' https://www.gstatic.com;"
