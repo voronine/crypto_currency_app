@@ -35,11 +35,11 @@ const valueRoutes = require('./routes/value');
 app.use('/api/value', valueRoutes);
 
 // Статические файлы из папки 'build' клиентского приложения
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(path.join(__dirname, '../../build')));
 
 // Отправка 'index.html' для всех остальных маршрутов
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+    res.sendFile(path.join(__dirname, '../../build', 'index.html'));
 });
 
 app.listen(PORT, () => {
