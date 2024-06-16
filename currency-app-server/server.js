@@ -2,7 +2,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const helmet = require('helmet');
-const path = require('path');
 require('dotenv').config();
 
 const app = express();
@@ -16,9 +15,9 @@ app.use(helmet.contentSecurityPolicy({
         scriptSrc: ["'self'", 'https://www.gstatic.com', "'unsafe-inline'"],
         imgSrc: ["'self'", 'data:', 'https://www.gstatic.com'],
         connectSrc: ["'self'", 'https://www.gstatic.com'],
-        fontSrc: ["'self'", 'https://fonts.gstatic.com'],
-        objectSrc: ["'none'"],
-        upgradeInsecureRequests: []
+        fontSrc: ["'self'", 'https://fonts.gstatic.com'], // Если нужны шрифты
+        objectSrc: ["'none'"], // Запрещает загрузку плагинов
+        upgradeInsecureRequests: [] // Автоматически переводит HTTP-запросы в HTTPS
     }
 }));
 
@@ -37,9 +36,3 @@ app.use('/api/currency', currencyRoutes);
 
 const valueRoutes = require('./routes/value');
 app.use('/api/value', valueRoutes);
-
-app.use(express.static(path.join(__dirname, '../client/build')));
-
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
-});
