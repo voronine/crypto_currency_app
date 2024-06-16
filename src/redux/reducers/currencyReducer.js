@@ -1,4 +1,3 @@
-// src/redux/reducers/currencyReducer.js
 const initialState = {
     currencies: [],
     prices: {},

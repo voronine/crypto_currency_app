@@ -1,4 +1,3 @@
-// src/redux/actions/valueActions.js
 export const addValue = (value) => async (dispatch) => {
     try {
         const response = await fetch('http://localhost:5000/api/value/add', {

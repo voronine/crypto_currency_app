@@ -13,6 +13,8 @@ services:
     envVars:
       - key: MONGO_URI
         value: 'mongodb+srv://voroninyevhenii:Marata117@cluster0.vsvglqf.mongodb.net/currencydb?retryWrites=true&w=majority'
+      - key: API_KEY
+        value: 'c76a0662d789bc11a7d2a889343ae001d9b7beca7d93327c57ab504efebf5e90'
       - key: PORT
         value: 5000
     routes:

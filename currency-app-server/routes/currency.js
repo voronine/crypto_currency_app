@@ -1,4 +1,3 @@
-// routes/currency.js
 const express = require('express');
 const router = express.Router();
 const Currency = require('../models/Currency');

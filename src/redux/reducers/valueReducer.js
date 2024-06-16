@@ -1,4 +1,3 @@
-// src/redux/reducers/valueReducer.js
 const initialState = {
     values: [],
 };
