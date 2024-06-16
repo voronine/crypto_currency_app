@@ -6,11 +6,11 @@ services:
     buildCommand: cd currency-app-server && npm install
     startCommand: node currency-app-server/server.js
     envVars:
-      - key: ATLAS_URI
+      - key: MONGO_URI
         value: 'mongodb+srv://voroninyevhenii:Marata117@cluster0.vsvglqf.mongodb.net/currencydb?retryWrites=true&w=majority'
       - key: PORT
         value: 5000
     routes:
       - path: /*
         headers:
-          Content-Security-Policy: "default-src 'self' https://www.gstatic.com;"
+          Content-Security-Policy: "default-src 'self' https://www.gstatic.com; style-src 'self' https://www.gstatic.com; img-src 'self' data: https://www.gstatic.com; script-src 'self' https://www.gstatic.com; connect-src 'self' https://www.gstatic.com;"

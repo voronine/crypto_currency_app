@@ -10,16 +10,22 @@ app.use(express.json());
 
 app.use(helmet.contentSecurityPolicy({
     directives: {
-      defaultSrc: ["'self'", 'https://www.gstatic.com'],
-    },
-  }));
+        defaultSrc: ["'self'", 'https://www.gstatic.com'],
+        styleSrc: ["'self'", 'https://www.gstatic.com'],
+        imgSrc: ["'self'", 'data:', 'https://www.gstatic.com'],
+        scriptSrc: ["'self'", 'https://www.gstatic.com'],
+        connectSrc: ["'self'", 'https://www.gstatic.com']
+    }
+}));
 
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('MongoDB connected'))
     .catch(err => console.error(err));
 
-app.listen(process.env.PORT || 5000, () => {
-    console.log(`Server is running on port ${process.env.PORT || 5000}`);
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
 
 const currencyRoutes = require('./routes/currency');
