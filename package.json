@@ -32,7 +32,7 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "server": "node $PWD/../currency-app-server/server.js"
+    "server": "node ./currency-app-server/server.js"
   },
   "eslintConfig": {
     "extends": [
