@@ -28,10 +28,6 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
-
 const currencyRoutes = require('./routes/currency');
 app.use('/api/currency', currencyRoutes);
 
@@ -39,9 +35,13 @@ const valueRoutes = require('./routes/value');
 app.use('/api/value', valueRoutes);
 
 // Обслуживание статических файлов из директории build клиентского приложения
-app.use(express.static(path.join(__dirname, '../client/build')));
+app.use(express.static(path.join(__dirname, '../build')));
 
 // Обработка всех остальных маршрутов
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+    res.sendFile(path.join(__dirname, '../build', 'index.html'));
+});
+
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
