@@ -34,12 +34,12 @@ app.use('/api/currency', currencyRoutes);
 const valueRoutes = require('./routes/value');
 app.use('/api/value', valueRoutes);
 
-// Обслуживание статических файлов из директории build клиентского приложения
-app.use(express.static(path.join(__dirname, '../build')));
+// Статические файлы из папки 'build' клиентского приложения
+app.use(express.static(path.join(__dirname, 'build')));
 
-// Обработка всех остальных маршрутов
+// Отправка 'index.html' для всех остальных маршрутов
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../build', 'index.html'));
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
 app.listen(PORT, () => {
