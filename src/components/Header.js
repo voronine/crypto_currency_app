@@ -12,7 +12,7 @@ const customStyles = {
         borderRadius: '10px 10px 0 0',
         backgroundColor: '#666',
         border: 'none',
-        color: '#fff',
+        color: '#ffffff',
         display: 'flex',
         alignItems: 'center'
     }),
@@ -20,13 +20,13 @@ const customStyles = {
         ...provided,
         display: 'flex',
         alignItems: 'center',
-        color: '#fff'
+        color: '#ffffff'
     }),
     menu: (provided) => ({
         ...provided,
         borderRadius: '0 0 10px 10px',
         backgroundColor: '#666',
-        color: '#fff'
+        color: '#ffffff'
     }),
     option: (provided, state) => ({
         ...provided,
@@ -34,7 +34,7 @@ const customStyles = {
         alignItems: 'center',
         justifyContent: 'space-between',
         backgroundColor: state.isSelected ? '#555' : state.isFocused ? '#555' : '#666',
-        color: '#fff',
+        color: '#ffffff',
         '&:hover': {
             backgroundColor: '#555'
         }
