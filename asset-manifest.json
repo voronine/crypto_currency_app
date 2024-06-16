@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/voronine/crypto_currency_app/static/css/main.1b1619bb.css",
-    "main.js": "/voronine/crypto_currency_app/static/js/main.422040d3.js",
+    "main.js": "/voronine/crypto_currency_app/static/js/main.f586a357.js",
     "static/js/453.9979d312.chunk.js": "/voronine/crypto_currency_app/static/js/453.9979d312.chunk.js",
     "index.html": "/voronine/crypto_currency_app/index.html",
     "main.1b1619bb.css.map": "/voronine/crypto_currency_app/static/css/main.1b1619bb.css.map",
-    "main.422040d3.js.map": "/voronine/crypto_currency_app/static/js/main.422040d3.js.map",
+    "main.f586a357.js.map": "/voronine/crypto_currency_app/static/js/main.f586a357.js.map",
     "453.9979d312.chunk.js.map": "/voronine/crypto_currency_app/static/js/453.9979d312.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.1b1619bb.css",
-    "static/js/main.422040d3.js"
+    "static/js/main.f586a357.js"
   ]
 }
