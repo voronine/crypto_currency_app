@@ -3,7 +3,12 @@ services:
     name: currency-app-server
     env: node
     plan: free
-    buildCommand: cd client && npm install && npm run build && cd ../currency-app-server && npm install
+    buildCommand: |
+      cd client
+      npm install
+      npm run build
+      cd ../currency-app-server
+      npm install
     startCommand: node currency-app-server/server.js
     envVars:
       - key: MONGO_URI
