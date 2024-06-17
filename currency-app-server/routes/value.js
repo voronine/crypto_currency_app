@@ -1,4 +1,3 @@
-// routes/value.js
 const express = require('express');
 const router = express.Router();
 const Value = require('../models/Value');

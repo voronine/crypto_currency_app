@@ -1,4 +1,3 @@
-// src/redux/reducers/valueReducer.js
 const initialState = {
     values: [],
 };
@@ -13,6 +12,13 @@ const valueReducer = (state = initialState, action) => {
             return {
                 ...state,
                 values: state.values.filter((value) => value._id !== action.payload),
+            };
+        case 'UPDATE_VALUE':
+            return {
+                ...state,
+                values: state.values.map((value) =>
+                    value._id === action.payload._id ? action.payload : value
+                ),
             };
         default:
             return state;

@@ -2,33 +2,38 @@
   "name": "currency-app-client",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://github.com/voronine/crypto_currency_app",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "chart.js": "^3.9.1",
     "chartjs-adapter-date-fns": "^3.0.0",
-    "chartjs-chart-financial": "^0.1.1",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "helmet": "^7.1.0",
     "mongoose": "^8.4.1",
-    "react": "^18.3.1",
+    "react": "^18.2.0",
     "react-chartjs-2": "^4.3.1",
-    "react-dom": "^18.3.1",
+    "react-dom": "^18.2.0",
     "react-modal": "^3.16.1",
     "react-redux": "^7.2.9",
     "react-router-dom": "^6.23.1",
-    "react-scripts": "5.0.1",
+    "react-select": "^5.8.0",
     "redux": "^4.2.1",
     "redux-devtools-extension": "^2.13.9",
-    "redux-thunk": "^3.1.0",
+    "redux-thunk": "^2.4.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "server": "node ./currency-app-server/server.js"
   },
   "eslintConfig": {
     "extends": [
@@ -47,5 +52,15 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "css-loader": "^7.1.2",
+    "gh-pages": "^6.1.1",
+    "postcss-loader": "^8.1.1",
+    "react-scripts": "^5.0.1",
+    "resolve-url-loader": "^5.0.0",
+    "sass": "^1.77.5",
+    "sass-loader": "^14.2.1",
+    "style-loader": "^4.0.0"
   }
 }

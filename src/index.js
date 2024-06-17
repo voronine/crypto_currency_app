@@ -1,7 +1,6 @@
 import React from 'react';
 import Modal from 'react-modal';
 import { createRoot } from 'react-dom/client';
-import './index.css';
 import reportWebVitals from './reportWebVitals';
 
 import { Provider } from 'react-redux';

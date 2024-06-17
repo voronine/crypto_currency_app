@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: currency-app-server
+    env: node
+    plan: free
+    buildCommand: |
+      cd currency-app-client
+      npm install
+      npm run build
+      cd ../currency-app-server
+      npm install
+    startCommand: node currency-app-server/server.js
+    envVars:
+      - key: MONGO_URI
+        value: 'mongodb+srv://voroninyevhenii:Marata117@cluster0.vsvglqf.mongodb.net/currencydb?retryWrites=true&w=majority'
+      - key: API_KEY
+        value: 'c76a0662d789bc11a7d2a889343ae001d9b7beca7d93327c57ab504efebf5e90'
+      - key: PORT
+        value: 5000
+    routes:
+      - path: /*
+        headers:
+          Content-Security-Policy: "default-src 'self' https://www.gstatic.com; style-src 'self' https://www.gstatic.com 'unsafe-inline'; script-src 'self' https://www.gstatic.com 'unsafe-inline'; img-src 'self' data: https://www.gstatic.com; connect-src 'self' https://www.gstatic.com;"

@@ -1,4 +1,5 @@
-// src/redux/actions/currencyActions.js
+const apiKey = process.env.API_KEY;
+
 export const addCurrency = (currency) => async (dispatch) => {
     try {
         const response = await fetch('http://localhost:5000/api/currency/add', {
@@ -27,7 +28,6 @@ export const fetchCurrencies = () => async (dispatch) => {
 
 export const fetchCurrencyPrice = (symbol) => async (dispatch) => {
     try {
-        const apiKey = 'c76a0662d789bc11a7d2a889343ae001d9b7beca7d93327c57ab504efebf5e90';
         const response = await fetch(`https://min-api.cryptocompare.com/data/price?fsym=${symbol}&tsyms=USDT&api_key=${apiKey}`);
         const data = await response.json();
         dispatch({ type: 'SET_CURRENCY_PRICE', payload: { symbol, price: data.USDT } });
@@ -76,5 +76,21 @@ export const deleteValue = (id) => async (dispatch) => {
         dispatch({ type: 'DELETE_VALUE', payload: id });
     } catch (error) {
         console.error('Error deleting value:', error);
+    }
+};
+
+export const deleteCurrency = (currencyId) => async (dispatch) => {
+    try {
+        const response = await fetch(`http://localhost:5000/api/currency/${currencyId}`, {
+            method: 'DELETE',
+        });
+        
+        if (!response.ok) {
+            throw new Error('Failed to delete currency');
+        }
+
+        dispatch({ type: 'DELETE_CURRENCY', payload: currencyId });
+    } catch (error) {
+        console.error('Error deleting currency:', error);
     }
 };
